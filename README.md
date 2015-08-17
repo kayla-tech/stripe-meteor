@@ -1,14 +1,15 @@
 A Meteor package containing [Stripe](https://stripe.com) scripts:
 
 - [Stripe.js](https://stripe.com/docs/stripe.js)
-- [Stripe Checkout](https://stripe.com/docs/checkout)
 - [Stripe for Node.js](https://github.com/stripe/stripe-node)
+
+NOTE: This does not contain `checkout.js`. If you require this script use [this](https://github.com/tyler-johnson/stripe-meteor) instead.
 
 ## Install
 
 Using Meteor's Package System:
 
-	$ meteor add mrgalaxy:stripe
+	$ meteor add kayla:stripe
 
 ## Usage
 
@@ -19,17 +20,6 @@ Stripe.js is now loaded directly from stripe.com and this happens after all othe
 ```js
 Meteor.startup(function() {
     Stripe.setPublishableKey('YOUR_PUBLISHABLE_KEY');
-});
-```
-
-The same goes for Stripe Checkout, too:
-
-```js
-Meteor.startup(function() {
-    var handler = StripeCheckout.configure({
-		key: 'YOUR_PUBLISHABLE_KEY',
-		token: function(token) {}
-	});
 });
 ```
 
@@ -52,7 +42,7 @@ Stripe.card.createToken({
 });
 ```
 
-See the Stripe docs (<https://stripe.com/docs/stripe.js>, <https://stripe.com/docs/checkout>) for all the API specifics.
+See the Stripe docs (<https://stripe.com/docs/stripe.js>, for all the API specifics.
 
 ### Server
 
@@ -62,7 +52,7 @@ Meteor.methods({
     var Stripe = StripeAPI('SECRET_KEY');
 
     Stripe.charges.create({
-      amount: 1000,
+      amount: 1000, // in ¢
       currency: 'usd',
       source: stripeToken
     }, function(err, charge) {
